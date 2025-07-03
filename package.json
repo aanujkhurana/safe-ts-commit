@@ -1,14 +1,15 @@
 {
   "name": "ts-check-commit-cli",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "bin/cli.js",
   "bin": {
-    "ts-check-commit": "./check-ts-errors.js"
+    "safe-ts-commit": "bin/cli.js"
   },
   "scripts": {
     "test": "node ./test-ts-check.js",
     "prepare": "husky",
-    "postinstall": "node ./postinstall-setup.js"
+    "postinstall": "node ./postinstall-setup.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -25,13 +26,14 @@
     "cli"
   ],
   "author": "Aanuj Khurana",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/aanujkhurana/ts-check-commit-cli/issues"
   },
   "homepage": "https://github.com/aanujkhurana/ts-check-commit-cli#readme",
   "description": "A Git hook utility that prevents committing TypeScript files with type errors",
   "devDependencies": {
+    "@types/node": "^24.0.10",
     "husky": "^9.1.7",
     "typescript": "^5.8.3"
   },

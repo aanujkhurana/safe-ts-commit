@@ -75,3 +75,23 @@ npx ts-check-commit
 ## License
 
 MIT
+
+# Project Structure
+
+```
+safe-ts-commit/
+├── bin/
+│   └── cli.js           # Entry CLI file (compiled from cli.ts)
+├── src/
+│   ├── getStagedFiles.ts
+│   ├── checkTsErrors.ts
+│   └── utils.ts
+├── tsconfig.json        # TypeScript config
+├── package.json
+├── README.md
+└── .husky/
+```
+
+- All core logic is in `src/` as TypeScript modules.
+- CLI entry point is in `bin/cli.ts` (compiled to `bin/cli.js`).
+- Husky hooks and cache are supported as before.

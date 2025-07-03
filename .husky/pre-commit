@@ -1,4 +1,2 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npx ts-check-commit
+npx safe-ts-commit
