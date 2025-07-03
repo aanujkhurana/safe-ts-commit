@@ -7,7 +7,8 @@
   },
   "scripts": {
     "test": "node ./test-ts-check.js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "node ./postinstall-setup.js"
   },
   "repository": {
     "type": "git",
