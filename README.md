@@ -1,11 +1,6 @@
 
 # `safe-ts-commit` 🛡️  
 > **Stop bad commits before they happen.** Automatically block Git commits if any TypeScript errors are detected in your staged files.
-
-[![npm version](https://img.shields.io/npm/v/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
-[![npm downloads](https://img.shields.io/npm/dm/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
-[![license](https://img.shields.io/npm/l/safe-ts-commit.svg)](./LICENSE)
-
 ---
 
 ## ✨ What is `safe-ts-commit`?
