@@ -6,22 +6,38 @@
     "ts-check-commit": "./check-ts-errors.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node ./test-ts-check.js",
     "prepare": "husky"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aanujkhurana/ts-check-commit-cli.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "git",
+    "git-hook",
+    "pre-commit",
+    "husky",
+    "lint",
+    "type-check",
+    "cli"
+  ],
+  "author": "Aanuj Khurana",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aanujkhurana/ts-check-commit-cli/issues"
   },
   "homepage": "https://github.com/aanujkhurana/ts-check-commit-cli#readme",
-  "description": "",
+  "description": "A Git hook utility that prevents committing TypeScript files with type errors",
   "devDependencies": {
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.0.0"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }
