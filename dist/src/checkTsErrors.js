@@ -80,6 +80,11 @@ function checkTypeScriptErrors(tsFiles, tscPath, cache, hashes) {
         if (fs.existsSync(tempFilePath)) {
             fs.unlinkSync(tempFilePath);
         }
-        throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} ${error.message}`);
+        if (error instanceof Error) {
+            throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} ${error.message}`);
+        }
+        else {
+            throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} Unknown error`);
+        }
     }
 }

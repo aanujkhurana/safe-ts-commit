@@ -51,10 +51,14 @@ export function checkTypeScriptErrors(
     saveCache(cache);
     console.log(`${colors.green}No TypeScript errors found. Proceeding with commit.${colors.reset}`);
     return false;
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (fs.existsSync(tempFilePath)) {
       fs.unlinkSync(tempFilePath);
     }
-    throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} ${error.message}`);
+    if (error instanceof Error) {
+      throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} ${error.message}`);
+    } else {
+      throw new Error(`${colors.red}${colors.bold}Error running TypeScript compiler:${colors.reset} Unknown error`);
+    }
   }
 } 

@@ -1,9 +1,9 @@
 {
   "name": "ts-check-commit-cli",
   "version": "1.0.0",
-  "main": "bin/cli.js",
+  "main": "dist/bin/cli.js",
   "bin": {
-    "safe-ts-commit": "bin/cli.js"
+    "safe-ts-commit": "dist/bin/cli.js"
   },
   "scripts": {
     "test": "node ./test-ts-check.js",
@@ -33,9 +33,11 @@
   "homepage": "https://github.com/aanujkhurana/ts-check-commit-cli#readme",
   "description": "A Git hook utility that prevents committing TypeScript files with type errors",
   "devDependencies": {
+    "@eslint/js": "^9.30.1",
     "@types/node": "^24.0.10",
     "husky": "^9.1.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.1"
   },
   "peerDependencies": {
     "typescript": ">=4.0.0"

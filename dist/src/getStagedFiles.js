@@ -10,6 +10,11 @@ function getStagedFiles() {
         return output.split('\n');
     }
     catch (error) {
-        throw new Error(`Error getting staged files: ${error.message}`);
+        if (error instanceof Error) {
+            throw new Error(`Error getting staged files: ${error.message}`);
+        }
+        else {
+            throw new Error('Error getting staged files: Unknown error');
+        }
     }
 }
