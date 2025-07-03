@@ -1,0 +1,27 @@
+{
+  "name": "ts-check-commit-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "ts-check-commit": "./check-ts-errors.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aanujkhurana/ts-check-commit-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aanujkhurana/ts-check-commit-cli/issues"
+  },
+  "homepage": "https://github.com/aanujkhurana/ts-check-commit-cli#readme",
+  "description": "",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
