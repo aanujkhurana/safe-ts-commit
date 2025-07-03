@@ -1,4 +1,6 @@
-# safe-ts-commit
+
+# `safe-ts-commit` 🛡️  
+> **Stop bad commits before they happen.** Automatically block Git commits if any TypeScript errors are detected in your staged files.
 
 [![npm version](https://img.shields.io/npm/v/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
 [![npm downloads](https://img.shields.io/npm/dm/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
@@ -6,128 +8,160 @@
 
 ---
 
-**Production Ready:**
+## ✨ What is `safe-ts-commit`?
 
-safe-ts-commit is a stable, well-tested Git hook utility trusted by teams to prevent committing TypeScript files with type errors. It is designed for professional and production environments, ensuring your codebase remains type-safe at every commit.
+`safe-ts-commit` is a **production-ready CLI tool** designed to protect your codebase by **blocking Git commits** if TypeScript type errors are present in your staged files.
+
+Perfect for teams and solo devs who value code quality and type safety.
 
 ---
 
-# What it does? 
+## 🚀 Why use this?
 
-Stops a Git commit if there are any TypeScript errors in staged or committed files.
+- ✅ **Type-Safe Commits** – Prevent buggy or broken commits due to TS errors.
+- ⚡ **Fast & Lightweight** – Only checks staged `.ts` / `.tsx` files.
+- 🎯 **Zero Config** – No extra setup required beyond install.
+- 🔌 **Husky-Ready** – Integrates seamlessly as a Git pre-commit hook.
+- 🎨 **Readable Output** – Colorful and actionable terminal messages.
 
-## Why safe-ts-commit?
+---
 
-- **Battle-tested:** Used in real-world projects to enforce TypeScript safety.
-- **Zero config:** Works out of the box with minimal setup.
-- **Fast:** Only checks staged files for maximum speed.
-- **Integrates with Husky:** Seamless pre-commit hook integration.
-- **Clear output:** Colorful, actionable error messages.
+## 🔧 Features
 
-## Features
+- 🧠 Detects only staged TypeScript files
+- 🚫 Aborts commit if errors are found
+- ✅ Allows commit to proceed if everything passes
+- 🧼 Supports filenames with spaces/special characters
+- 🖍️ Clean and colorful CLI messages
+- 🧪 One-line setup: Auto-installs Husky and configures pre-commit hook.
 
-- 🔍 Checks only staged TypeScript files (`.ts` and `.tsx`)
-- 🚫 Blocks commits when TypeScript errors are found
-- ✅ Allows commits to proceed when no errors are detected
-- 🎨 Colorful terminal output for better readability
-- 🛡️ Handles file paths with spaces and special characters
+---
 
-## Prerequisites
+## 📦 Prerequisites
 
-- Node.js (v12 or higher recommended)
-- TypeScript installed in your project
-- Git
+- Node.js v12+
+- TypeScript installed locally (`npm install typescript --save-dev`)
+- Git (with initialized repo)
 
-## Installation
+---
 
-```bash
-npm install safe-ts-commit --save-dev
-```
-
-## Setup with Husky
-
-1. Install husky if you haven't already:
-   ```bash
-   npm install husky --save-dev
-   npx husky install
-   ```
-
-2. Add the prepare script to your package.json (if not already present):
-   ```json
-   {
-     "scripts": {
-       "prepare": "husky"
-     }
-   }
-   ```
-
-3. Create a pre-commit hook:
-   ```bash
-   npx husky add .husky/pre-commit "npx safe-ts-commit"
-   ```
-
-## How It Works
-
-When you attempt to commit changes, the pre-commit hook will:
-
-1. Get the list of staged files using `git diff --cached --name-only`
-2. Filter for TypeScript files (`.ts` and `.tsx`)
-3. Run the TypeScript compiler (`tsc --noEmit`) on those files
-4. If any TypeScript errors are found, the commit will be aborted with detailed error messages
-5. If no errors are found, the commit will proceed normally
-
-## Manual Usage
-
-You can also run the check manually without committing:
+## 📥 Installation
 
 ```bash
-npx safe-ts-commit
+npm install --save-dev safe-ts-commit
 ```
 
-## Usage
+---
 
-After installing, you can run the CLI manually:
+## ⚡ One-Liner Setup (Auto-Install)
+
+Don’t want to manually configure Husky? Run this:
 
 ```bash
-npx safe-ts-commit
+npx safe-ts-commit --install
 ```
 
-Or, set it up as a pre-commit hook with Husky (recommended):
+This will:
+
+- ✅ Install Husky (if not already installed)
+- ✅ Add `prepare` script to your `package.json`
+- ✅ Create a `.husky/pre-commit` hook that runs `safe-ts-commit`
+- ✅ Lock your commits behind type safety in seconds
+
+> Perfect for teams or quick setups. One command and you’re protected.
+
+---
+
+## ⚙️ Setup with Husky (Manual)
+
+1. Install Husky:
+
+```bash
+npm install husky --save-dev
+npx husky install
+```
+
+2. Add a `prepare` script in your `package.json`:
+
+```json
+"scripts": {
+  "prepare": "husky install"
+}
+```
+
+3. Add a pre-commit hook:
 
 ```bash
 npx husky add .husky/pre-commit "npx safe-ts-commit"
 ```
 
-## Publishing to npm
+---
 
-- This package is already published and production-ready. To use it, simply follow the installation and setup instructions above.
+## 🛠 How it Works
 
-## Troubleshooting
+When a commit is attempted, `safe-ts-commit`:
 
-- **TypeScript not found**: Make sure TypeScript is installed in your project (`npm install typescript --save-dev`)
-- **No files being checked**: Ensure your TypeScript files are staged for commit (`git add path/to/your/file.ts`)
-- **Hook not running**: Verify that Husky is properly installed and the pre-commit hook is executable
+1. Collects staged files via `git diff --cached --name-only`
+2. Filters `.ts` and `.tsx` files
+3. Runs `tsc --noEmit` on those files
+4. If any type errors are found:
+   - ❌ The commit is blocked with a detailed error report
+5. If all files pass:
+   - ✅ The commit proceeds as normal
 
-## License
+---
 
-MIT
+## 🧪 Manual Usage
 
-# Project Structure
+You can run it manually without a Git hook:
+
+```bash
+npx safe-ts-commit
+```
+
+---
+
+## 🔄 Optional CLI Flags
+
+```bash
+safe-ts-commit [options]
+
+--install        Run auto-setup with Husky
+--debug          Print detailed debug logs
+--silent         Hide output unless there's an error
+--tsconfig       Path to custom tsconfig.json
+```
+
+---
+
+## 🧰 Troubleshooting
+
+| Issue                        | Solution                                                                 |
+|-----------------------------|--------------------------------------------------------------------------|
+| TypeScript not found        | Ensure you installed TypeScript locally (`npm install typescript`)       |
+| No files being checked      | Make sure your TypeScript files are staged (`git add path/to/file.ts`)   |
+| Hook not running            | Ensure Husky is installed and the pre-commit hook is executable          |
+
+---
+
+## 🗂 Project Structure
 
 ```
 safe-ts-commit/
 ├── bin/
-│   └── cli.js           # Entry CLI file (compiled from cli.ts)
+│   └── cli.js            # CLI entry (compiled from src/cli.ts)
 ├── src/
 │   ├── getStagedFiles.ts
 │   ├── checkTsErrors.ts
 │   └── utils.ts
-├── tsconfig.json        # TypeScript config
+├── .husky/               # Husky hooks
+├── tsconfig.json
 ├── package.json
-├── README.md
-└── .husky/
+└── README.md
 ```
 
-- All core logic is in `src/` as TypeScript modules.
-- CLI entry point is in `bin/cli.ts` (compiled to `bin/cli.js`).
-- Husky hooks and cache are supported as before.
+---
+
+## 📜 License
+
+MIT — feel free to fork, improve, and contribute!
