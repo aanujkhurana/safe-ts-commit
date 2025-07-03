@@ -1,3 +1,7 @@
+# What it does? 
+
+Stops a Git commit if there are any TypeScript errors in staged or committed files.
+
 # ts-check-commit-cli
 
 A Git hook utility that prevents committing TypeScript files with type errors. This package helps maintain code quality by ensuring that all TypeScript files staged for commit pass the TypeScript compiler's type checking.
@@ -70,4 +74,4 @@ npx ts-check-commit
 
 ## License
 
-ISC
+MIT
