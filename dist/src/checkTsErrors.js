@@ -89,8 +89,13 @@ function checkTypeScriptErrors(tsFiles, tscPath, cache, hashes) {
                 return null;
             })
                 .filter(Boolean);
-            const errorFiles = Array.from(new Set(errorDetails.map(e => e.file)));
-            console.error(`\n${colors.red}${colors.bold}❌ TypeScript errors found in ${errorFiles.length} file${errorFiles.length !== 1 ? 's' : ''}:${colors.reset}`);
+            // Clean up file names and ensure count is correct
+            let errorFiles = Array.from(new Set(errorDetails.map(e => e.file.trim())));
+            // Fallback: if errorFiles is empty but errorDetails exist, try to extract file names from error lines
+            if (errorFiles.length === 0 && errorDetails.length > 0) {
+                errorFiles = errorDetails.map(e => e.file.trim());
+            }
+            console.error(`\n${colors.red}${colors.bold}❌ TypeScript errors found in staged files:${colors.reset}`);
             for (const file of errorFiles) {
                 console.error(` - ${file}`);
             }
