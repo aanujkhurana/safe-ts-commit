@@ -1,8 +1,8 @@
 {
   "src/checkTsErrors.ts": {
     "hash": "00c2e6055867d4087e35cf1a1d961ae2b601cced6ca2cb4a16af984a8a115156",
-    "lastChecked": 1751532886141,
-    "hadErrors": true
+    "lastChecked": 1751532945394,
+    "hadErrors": false
   },
   "src/getStagedFiles.ts": {
     "hash": "cfa9055a2ba21948f3a025a3013e78459e1bee07e5fd619f8ddf02878d230c1d",
@@ -11,12 +11,12 @@
   },
   "src/error-demo.ts": {
     "hash": "e919ef289ac94118d9ab39f5e38124480015c8aaf10096cfce68f0de56ad3436",
-    "lastChecked": 1751532886141,
+    "lastChecked": 1751533031423,
     "hadErrors": true
   },
   "bin/cli.ts": {
     "hash": "4ad121bdd473100a0530add68d52589f677254495ca1e16cd5e49434d7e03f1c",
-    "lastChecked": 1751532886141,
-    "hadErrors": true
+    "lastChecked": 1751532945394,
+    "hadErrors": false
   }
 }
