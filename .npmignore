@@ -1,0 +1,16 @@
+# Exclude dev and test files from npm package
+src/
+bin/
+test-ts-check.js
+check-ts-errors.js
+git-diff
+.eslintrc*
+eslint.config.js
+CONTRIBUTING.md
+.github/
+tsconfig.json
+*.log
+*.swp
+*.swo
+.idea/
+.vscode/ 

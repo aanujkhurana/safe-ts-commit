@@ -1,7 +1,0 @@
-#!/bin/sh
-# Mock git-diff command for testing
-# This script returns the test file path when called with --cached --name-only arguments
-
-if [ "$1" = "--cached" ] && [ "$2" = "--name-only" ]; then
-  echo "test-file.ts"
-fi

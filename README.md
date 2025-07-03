@@ -66,6 +66,26 @@ You can also run the check manually without committing:
 npx ts-check-commit
 ```
 
+## Usage
+
+After installing, you can run the CLI manually:
+
+```bash
+npx safe-ts-commit
+```
+
+Or, set it up as a pre-commit hook with Husky (recommended):
+
+```bash
+npx husky add .husky/pre-commit "npx safe-ts-commit"
+```
+
+## Publishing to npm
+
+1. Make sure your package name in `package.json` is unique on npm.
+2. Run `npm run build` to generate the compiled output in `dist/`.
+3. Run `npm publish` to publish your package.
+
 ## Troubleshooting
 
 - **TypeScript not found**: Make sure TypeScript is installed in your project (`npm install typescript --save-dev`)

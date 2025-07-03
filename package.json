@@ -6,7 +6,6 @@
     "safe-ts-commit": "dist/bin/cli.js"
   },
   "scripts": {
-    "test": "node ./test-ts-check.js",
     "prepare": "husky",
     "postinstall": "node ./postinstall-setup.js",
     "build": "tsc"

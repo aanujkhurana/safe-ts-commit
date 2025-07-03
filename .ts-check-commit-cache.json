@@ -1,7 +1,7 @@
 {
   "src/checkTsErrors.ts": {
-    "hash": "3bf6937f17fa85510d9f3ffc884a4762b70ac8d85dd7ae2b808dcce2208596d4",
-    "lastChecked": 1751532000478,
+    "hash": "2a04aebdd9f401c7176caddd66157965414dbdb1de1e29ac32947477433bf8a7",
+    "lastChecked": 1751532173913,
     "hadErrors": false
   },
   "src/getStagedFiles.ts": {
