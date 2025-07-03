@@ -60,18 +60,51 @@ function checkTypeScriptErrors(tsFiles, tscPath, cache, hashes) {
         });
         fs.unlinkSync(tempFilePath);
         if (result.status !== 0) {
-            // Parse error output to extract files with errors
+            // Parse error output to extract files with errors and their locations
             const errorOutput = result.stderr || result.stdout || '';
-            const errorFiles = Array.from(new Set(errorOutput
-                .split('\n')
-                .map(line => { var _a; return (_a = line.match(/^(.*\.(ts|tsx))\(/)) === null || _a === void 0 ? void 0 : _a[1]; })
-                .filter(Boolean)));
+            const errorLines = errorOutput.split('\n');
+            // Robust regex: matches file:line:col - error TSxxxx: message, and file(line,col): error TSxxxx: message
+            const errorDetails = errorLines
+                .map(line => {
+                // Try colon format: file:line:col - error TSxxxx: message
+                let match = line.match(/^(.*\.(ts|tsx|js|jsx)):(\d+):(\d+) - (error TS\d+: .+)/);
+                if (match) {
+                    return {
+                        file: match[1],
+                        line: match[3],
+                        col: match[4],
+                        message: match[5],
+                    };
+                }
+                // Try paren format: file(line,col): error TSxxxx: message
+                match = line.match(/^(.*\.(ts|tsx|js|jsx))\((\d+),(\d+)\): (error TS\d+: .+)/);
+                if (match) {
+                    return {
+                        file: match[1],
+                        line: match[2],
+                        col: match[3],
+                        message: match[4],
+                    };
+                }
+                return null;
+            })
+                .filter(Boolean);
+            const errorFiles = Array.from(new Set(errorDetails.map(e => e.file)));
             console.error(`\n${colors.red}${colors.bold}❌ TypeScript errors found in ${errorFiles.length} file${errorFiles.length !== 1 ? 's' : ''}:${colors.reset}`);
             for (const file of errorFiles) {
                 console.error(` - ${file}`);
             }
-            // Optionally, print the first few lines of errorOutput for context
-            // console.error(errorOutput.split('\n').slice(0, 10).join('\n'));
+            // Show detailed error locations and messages
+            console.error(`\n${colors.red}${colors.bold}Details:${colors.reset}`);
+            if (errorDetails.length > 0) {
+                for (const detail of errorDetails) {
+                    console.error(`  ${colors.yellow}${detail.file}:${detail.line}:${detail.col}${colors.reset} - ${detail.message}`);
+                }
+            }
+            else {
+                // Fallback: print raw error output if no details matched
+                console.error(errorOutput);
+            }
             console.error(`\n${colors.yellow}${colors.bold}💥 Commit aborted. Fix TS errors before proceeding.${colors.reset}\n`);
             for (const file of tsFiles) {
                 cache[file] = { hash: hashes[file], lastChecked: Date.now(), hadErrors: true };

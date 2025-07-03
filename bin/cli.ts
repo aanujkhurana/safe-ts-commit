@@ -54,8 +54,8 @@ function main() {
     // All files unchanged and previously checked
     const hasPrevErrors = tsFiles.some(f => cache[f] && cache[f].hadErrors);
     if (hasPrevErrors) {
-      console.error('TypeScript errors found (from cache). Commit aborted.');
-      process.exit(1);
+      // Rerun the check to show detailed error output
+      checkTypeScriptErrors(tsFiles, tsResult.path, cache, hashes);
     } else {
       console.log('No TypeScript errors found (from cache). Proceeding with commit.');
     }

@@ -38,24 +38,46 @@ export function checkTypeScriptErrors(
       // Parse error output to extract files with errors and their locations
       const errorOutput = result.stderr || result.stdout || '';
       const errorLines = errorOutput.split('\n');
-      const errorFiles = Array.from(new Set(
-        errorLines
-          .map(line => line.match(/^(.*\.(ts|tsx))\((\d+),(\d+)\):/))
-          .filter(Boolean)
-          .map(match => match![1])
-      ));
+      // Robust regex: matches file:line:col - error TSxxxx: message, and file(line,col): error TSxxxx: message
+      const errorDetails = errorLines
+        .map(line => {
+          // Try colon format: file:line:col - error TSxxxx: message
+          let match = line.match(/^(.*\.(ts|tsx|js|jsx)):(\d+):(\d+) - (error TS\d+: .+)/);
+          if (match) {
+            return {
+              file: match[1],
+              line: match[3],
+              col: match[4],
+              message: match[5],
+            };
+          }
+          // Try paren format: file(line,col): error TSxxxx: message
+          match = line.match(/^(.*\.(ts|tsx|js|jsx))\((\d+),(\d+)\): (error TS\d+: .+)/);
+          if (match) {
+            return {
+              file: match[1],
+              line: match[2],
+              col: match[3],
+              message: match[4],
+            };
+          }
+          return null;
+        })
+        .filter(Boolean) as { file: string; line: string; col: string; message: string }[];
+      const errorFiles = Array.from(new Set(errorDetails.map(e => e.file)));
       console.error(`\n${colors.red}${colors.bold}❌ TypeScript errors found in ${errorFiles.length} file${errorFiles.length !== 1 ? 's' : ''}:${colors.reset}`);
       for (const file of errorFiles) {
         console.error(` - ${file}`);
       }
       // Show detailed error locations and messages
       console.error(`\n${colors.red}${colors.bold}Details:${colors.reset}`);
-      for (const line of errorLines) {
-        const match = line.match(/^(.*\.(ts|tsx))\((\d+),(\d+)\): (error TS\d+: .+)/);
-        if (match) {
-          const [, file, lineNum, colNum, message] = match;
-          console.error(`  ${colors.yellow}${file}:${lineNum}:${colNum}${colors.reset} - ${message}`);
+      if (errorDetails.length > 0) {
+        for (const detail of errorDetails) {
+          console.error(`  ${colors.yellow}${detail.file}:${detail.line}:${detail.col}${colors.reset} - ${detail.message}`);
         }
+      } else {
+        // Fallback: print raw error output if no details matched
+        console.error(errorOutput);
       }
       console.error(`\n${colors.yellow}${colors.bold}💥 Commit aborted. Fix TS errors before proceeding.${colors.reset}\n`);
       for (const file of tsFiles) {
