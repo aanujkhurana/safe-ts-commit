@@ -20,7 +20,7 @@ export function checkTypeScriptErrors(
 ): boolean {
   if (tsFiles.length === 0) return false;
 
-  console.log(`${colors.blue}Checking TypeScript errors in ${tsFiles.length} staged files...${colors.reset}`);
+  console.log(`${colors.blue}🔍 Checking staged TypeScript files...${colors.reset}`);
 
   const tempFilePath = path.join(process.cwd(), '.ts-files-to-check.txt');
   fs.writeFileSync(tempFilePath, tsFiles.join('\n'));
@@ -35,9 +35,21 @@ export function checkTypeScriptErrors(
     fs.unlinkSync(tempFilePath);
 
     if (result.status !== 0) {
-      console.error(`\n${colors.red}${colors.bold}TypeScript errors found:${colors.reset}\n`);
-      console.error(result.stderr || result.stdout);
-      console.error(`\n${colors.yellow}${colors.bold}Commit aborted. Please fix the TypeScript errors and try again.${colors.reset}\n`);
+      // Parse error output to extract files with errors
+      const errorOutput = result.stderr || result.stdout || '';
+      const errorFiles = Array.from(new Set(
+        errorOutput
+          .split('\n')
+          .map(line => line.match(/^(.*\.(ts|tsx))\(/)?.[1])
+          .filter(Boolean)
+      ));
+      console.error(`\n${colors.red}${colors.bold}❌ TypeScript errors found in ${errorFiles.length} file${errorFiles.length !== 1 ? 's' : ''}:${colors.reset}`);
+      for (const file of errorFiles) {
+        console.error(` - ${file}`);
+      }
+      // Optionally, print the first few lines of errorOutput for context
+      // console.error(errorOutput.split('\n').slice(0, 10).join('\n'));
+      console.error(`\n${colors.yellow}${colors.bold}💥 Commit aborted. Fix TS errors before proceeding.${colors.reset}\n`);
       for (const file of tsFiles) {
         cache[file] = { hash: hashes[file], lastChecked: Date.now(), hadErrors: true };
       }
