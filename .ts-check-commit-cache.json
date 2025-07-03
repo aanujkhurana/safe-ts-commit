@@ -3,5 +3,10 @@
     "hash": "3bf6937f17fa85510d9f3ffc884a4762b70ac8d85dd7ae2b808dcce2208596d4",
     "lastChecked": 1751532000478,
     "hadErrors": false
+  },
+  "src/getStagedFiles.ts": {
+    "hash": "cfa9055a2ba21948f3a025a3013e78459e1bee07e5fd619f8ddf02878d230c1d",
+    "lastChecked": 1751532071991,
+    "hadErrors": false
   }
 }
