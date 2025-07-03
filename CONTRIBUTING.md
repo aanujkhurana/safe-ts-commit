@@ -1,6 +1,6 @@
-# Contributing to ts-check-commit-cli
+# Contributing to safe-ts-commit
 
-Thank you for considering contributing to ts-check-commit-cli! This document provides guidelines and instructions for contributing to this project.
+Thank you for considering contributing to safe-ts-commit! This document provides guidelines and instructions for contributing to this project.
 
 ## Code of Conduct
 

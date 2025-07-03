@@ -1,5 +1,5 @@
 {
-  "name": "ts-check-commit-cli",
+  "name": "safe-ts-commit",
   "version": "1.0.0",
   "main": "dist/bin/cli.js",
   "bin": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aanujkhurana/ts-check-commit-cli.git"
+    "url": "git+https://github.com/aanujkhurana/safe-ts-commit.git"
   },
   "keywords": [
     "typescript",
@@ -27,9 +27,9 @@
   "author": "Aanuj Khurana",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aanujkhurana/ts-check-commit-cli/issues"
+    "url": "https://github.com/aanujkhurana/safe-ts-commit/issues"
   },
-  "homepage": "https://github.com/aanujkhurana/ts-check-commit-cli#readme",
+  "homepage": "https://github.com/aanujkhurana/safe-ts-commit#readme",
   "description": "A Git hook utility that prevents committing TypeScript files with type errors",
   "devDependencies": {
     "@eslint/js": "^9.30.1",

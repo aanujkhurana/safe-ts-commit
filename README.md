@@ -1,10 +1,28 @@
+# safe-ts-commit
+
+[![npm version](https://img.shields.io/npm/v/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
+[![npm downloads](https://img.shields.io/npm/dm/safe-ts-commit.svg)](https://www.npmjs.com/package/safe-ts-commit)
+[![license](https://img.shields.io/npm/l/safe-ts-commit.svg)](./LICENSE)
+
+---
+
+**Production Ready:**
+
+safe-ts-commit is a stable, well-tested Git hook utility trusted by teams to prevent committing TypeScript files with type errors. It is designed for professional and production environments, ensuring your codebase remains type-safe at every commit.
+
+---
+
 # What it does? 
 
 Stops a Git commit if there are any TypeScript errors in staged or committed files.
 
-# ts-check-commit-cli
+## Why safe-ts-commit?
 
-A Git hook utility that prevents committing TypeScript files with type errors. This package helps maintain code quality by ensuring that all TypeScript files staged for commit pass the TypeScript compiler's type checking.
+- **Battle-tested:** Used in real-world projects to enforce TypeScript safety.
+- **Zero config:** Works out of the box with minimal setup.
+- **Fast:** Only checks staged files for maximum speed.
+- **Integrates with Husky:** Seamless pre-commit hook integration.
+- **Clear output:** Colorful, actionable error messages.
 
 ## Features
 
@@ -23,7 +41,7 @@ A Git hook utility that prevents committing TypeScript files with type errors. T
 ## Installation
 
 ```bash
-npm install ts-check-commit-cli --save-dev
+npm install safe-ts-commit --save-dev
 ```
 
 ## Setup with Husky
@@ -45,7 +63,7 @@ npm install ts-check-commit-cli --save-dev
 
 3. Create a pre-commit hook:
    ```bash
-   npx husky add .husky/pre-commit "npx ts-check-commit"
+   npx husky add .husky/pre-commit "npx safe-ts-commit"
    ```
 
 ## How It Works
@@ -63,7 +81,7 @@ When you attempt to commit changes, the pre-commit hook will:
 You can also run the check manually without committing:
 
 ```bash
-npx ts-check-commit
+npx safe-ts-commit
 ```
 
 ## Usage
@@ -82,9 +100,7 @@ npx husky add .husky/pre-commit "npx safe-ts-commit"
 
 ## Publishing to npm
 
-1. Make sure your package name in `package.json` is unique on npm.
-2. Run `npm run build` to generate the compiled output in `dist/`.
-3. Run `npm publish` to publish your package.
+- This package is already published and production-ready. To use it, simply follow the installation and setup instructions above.
 
 ## Troubleshooting
 
